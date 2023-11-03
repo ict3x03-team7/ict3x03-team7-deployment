@@ -17,6 +17,8 @@ services:
 
   jenkins:
     image: jenkins/jenkins:lts
+    environment:
+      - JENKINS_ARGS=--prefix=/jenkins
     volumes:
       - "jenkins_home:/var/jenkins_home"
     networks:
@@ -24,7 +26,7 @@ services:
 
   mysql:
     image: mysql:8.0.33
-    command: --default-authentication-plugin=mysql_native_password --port=3323
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     env_file:
       - .env
@@ -89,4 +91,3 @@ volumes:
 networks:
   reverse-proxy:
     driver: bridge
-
